@@ -16,18 +16,20 @@ macos: sudo core-macos packages link
 linux: core-linux link
 
 core-linux:
-	sudo apt-get update
+	sudo apt-get update || true
 
 
 
 stow-linux: core-linux
-				is-executable stow || apt-get -y install stow
+				is-executable stow || sudo apt install -y stow
 
 vim-linux:
-				is-executable vim || apt-get install -y vim
+				is-executable vim || sudo apt install -y vim
 
 zsh-linux:
-				is-executable zsh || apt-get install -y zsh
+				is-executable zsh || \
+								$$(sudo apt install -y zsh \
+								&& sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)")
 
 install-vim:
 				is-dir "$(HOME)/.vim" || \

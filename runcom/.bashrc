@@ -117,4 +117,4 @@ if ! shopt -oq posix; then
 fi
 
 export PATH=$PATH:/mnt/b7837704-95c2-40e3-9c9b-c417c4b4cca9/Drive/sdk/go/go1.14.1/bin/
-export PATH=$PATH:/home/vasko/go/bin/:/home/vasko/.local/bin/
+export PATH=$PATH:/home/vasko/go/bin/:/home/vasko/.local/bin/:/usr/local/go/bin

@@ -13,7 +13,7 @@ all: $(OS)
 
 macos: sudo core-macos packages link
 
-linux: core-linux link
+linux: core-linux vim-$(OS) zsh-$(OS) install-vim link
 
 core-linux:
 	sudo apt-get update || true
@@ -39,7 +39,7 @@ install-vim:
 		     && git clone https://github.com/arcticicestudio/nord-vim.git $(HOME)/.vim/bundle/nord-vim)
 				
 
-link: stow-$(OS) vim-$(OS) zsh-$(OS) install-vim
+link: stow-$(OS)
 	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then \
 		mv -v $(HOME)/$$FILE{,.bak}; fi; done
 	mkdir -p $(XDG_CONFIG_HOME)

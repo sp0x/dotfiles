@@ -13,7 +13,7 @@ all: $(OS)
 
 macos: sudo core-macos packages link
 
-linux: core-linux vim-$(OS) zsh-$(OS) install-vim link
+linux: core-linux vim-$(OS) zsh-$(OS) install-vim dotnet-$(OS) pip3-$(OS) link
 
 core-linux:
 	sudo apt-get update || true
@@ -29,7 +29,21 @@ vim-linux:
 zsh-linux:
 				is-executable zsh || \
 								$$(sudo apt install -y zsh \
-								&& sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)")
+								&& sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
+								&& chsh -s $(which zsh))
+
+dotnet-linux:
+				is-executable dotnet || \
+								$$(wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+								&& sudo dpkg -i packages-microsoft-prod.deb \
+								&& rm packages-microsoft-prod.deb \
+								&& sudo apt-get update \
+								&& sudo apt-get install -y apt-transport-https \
+								&& sudo apt-get update \
+								&& sudo apt-get install -y dotnet-sdk-{6,7}.0)
+
+pip3-linux:
+				is-executable pip3 || sudo apt install -y python3-pip
 
 install-vim:
 				is-dir "$(HOME)/.vim" || \

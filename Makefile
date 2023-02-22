@@ -46,11 +46,11 @@ pip3-linux:
 				is-executable pip3 || sudo apt install -y python3-pip
 
 install-vim:
-				is-dir "$(HOME)/.vim" || \
+				(is-dir "$(HOME)/.vim" && is-dir "$(HOME)/.vim/autoload") || \
 				 $$(mkdir -p ~/.vim/autoload ~/.vim/bundle \
 				 && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim \
 				 && git clone https://github.com/preservim/nerdtree.git $(HOME)/.vim/bundle/nerdtree \
-		     && git clone https://github.com/arcticicestudio/nord-vim.git $(HOME)/.vim/bundle/nord-vim)
+		     		 && git clone https://github.com/arcticicestudio/nord-vim.git $(HOME)/.vim/bundle/nord-vim)
 				
 
 link: stow-$(OS)

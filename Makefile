@@ -40,7 +40,7 @@ dotnet-linux:
 								&& sudo apt-get update \
 								&& sudo apt-get install -y apt-transport-https \
 								&& sudo apt-get update \
-								&& sudo apt-get install -y dotnet-sdk-{6,7}.0)
+								&& sudo apt-get install -y dotnet-sdk-{8}.0)
 
 pip3-linux:
 				is-executable pip3 || sudo apt install -y python3-pip

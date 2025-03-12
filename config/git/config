@@ -3,8 +3,8 @@
 	autocrlf=input
 
 [user]
-    name=Vasil
-    email=vaskovasilev94@yahoo.com
+	name = vasil
+	email = vasil.vasilevext@delaval.com
 
 [alias]
 	c = commit -am
@@ -40,3 +40,12 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
+[credential]
+	helper = 
+	helper = /usr/local/bin/git-credential-manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = false

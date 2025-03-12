@@ -53,7 +53,7 @@ esac
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
-
+export EDITOR="/opt/nvim-linux64/bin/nvim"
 
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
@@ -150,8 +150,17 @@ fi
 
 export PATH=$PATH:/mnt/b7837704-95c2-40e3-9c9b-c417c4b4cca9/Drive/sdk/go/go1.14.1/bin/
 export PATH=$PATH:${HOME}/go/bin/:/usr/local/go/bin
+# GO
+# export GOROOT="/usr/lib/go-1.19" # got it through go env | grep GOROOT
+# export GOPATH="$HOME/go"
+export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH=${PATH}:/home/vasko/.local/bin
+export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:/opt/mssql-tools/bin"
+export GCM_CREDENTIAL_STORE=secretservice
+. "$HOME/.cargo/env"

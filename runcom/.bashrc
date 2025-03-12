@@ -3,3 +3,4 @@
 # for examples
 
 source ~/.profile
+. "$HOME/.cargo/env"

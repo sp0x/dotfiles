@@ -13,7 +13,7 @@ all: $(OS)
 
 macos: sudo core-macos packages link
 
-linux: core-linux vim-$(OS) zsh-$(OS) install-vim dotnet-$(OS) pip3-$(OS) link
+linux: core-linux vim-$(OS) zsh-$(OS) install-vim dotnet-$(OS) pip3-$(OS) python-$(OS) link
 
 core-linux:
 	sudo apt-get update || true
@@ -41,6 +41,9 @@ dotnet-linux:
 								&& sudo apt-get install -y apt-transport-https \
 								&& sudo apt-get update \
 								&& sudo apt-get install -y dotnet-sdk-{8}.0)
+
+python-linux:
+	curl -LsSf https://astral.sh/uv/install.sh | sh
 
 pip3-linux:
 				is-executable pip3 || sudo apt install -y python3-pip

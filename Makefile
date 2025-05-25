@@ -42,7 +42,16 @@ zsh-linux:
 
 dotnet-linux:
 				is-executable dotnet || \
-								$$(sudo apt-get install -y dotnet-sdk-{6,7}.0 dotnet{6,7} apt-transport-https)
+								$$(wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+								&& sudo dpkg -i packages-microsoft-prod.deb \
+								&& rm packages-microsoft-prod.deb \
+								&& sudo apt-get update \
+								&& sudo apt-get install -y apt-transport-https \
+								&& sudo apt-get update \
+								&& sudo apt-get install -y dotnet-sdk-{8}.0)
+
+python-linux:
+	curl -LsSf https://astral.sh/uv/install.sh | sh
 
 pip3-linux:
 				is-executable pip3 || sudo apt install -y python3-pip

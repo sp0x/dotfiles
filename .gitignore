@@ -2,3 +2,6 @@ runcom/.local/bin
 runcom/.local/zig
 .git
 .tokens
+runcom/.local/bin/obsidian
+runcom/.local/bin/uv
+runcom/.local/bin/vale

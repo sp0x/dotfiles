@@ -3,8 +3,8 @@
 	autocrlf=input
 
 [user]
-    name=Vasil
-    email=vaskovasilev94@yahoo.com
+	name = vasil
+	email = vasil.vasilevext@delaval.com
 
 [alias]
 	c = commit -am

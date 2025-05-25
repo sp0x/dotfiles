@@ -11,6 +11,10 @@ alias atom=code
 alias vim=nvim
 alias v=nvim
 
+# Editors
+alias vim=nvim
+alias v=nvim
+
 # be nice
 alias please=sudo
 alias hosts='sudo $EDITOR /etc/hosts'   # yes I occasionally 127.0.0.1 twitter.com ;)
@@ -78,3 +82,5 @@ fi
 alias docker-rm-all='docker rm -vf $(docker ps -aq)'
 alias docker-rmi-all='docker rmi -f $(docker images | grep "<none>" | awk "{print \$3}")'
 alias dps='docker ps --format="table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
+alias wezterm='flatpak run org.wezfurlong.wezterm'
+

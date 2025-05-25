@@ -35,8 +35,21 @@
 	changed = green
 	untracked = cyan
 [credential "https://github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[credential]
+	helper = /usr/local/bin/git-credential-manager
+	credentialStore = gpg
+[safe]
+
+[pus]
+	autoSetupRemote = true
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main

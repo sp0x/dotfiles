@@ -148,10 +148,16 @@ if [ -d /mnt/c ]; then
   unset file
 fi
 
-export PATH=$PATH:/mnt/b7837704-95c2-40e3-9c9b-c417c4b4cca9/Drive/sdk/go/go1.14.1/bin/
+export PATH=$PATH:${HOME}/.dotnet
+export PATH="$PATH:${HOME}/.dotnet/tools"
 export PATH=$PATH:${HOME}/go/bin/:/usr/local/go/bin
+export PATH="$PATH:/opt/nvim-linux64/bin"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export GCM_CREDENTIAL_STORE=gpg
+export DOTNET_ROOT=${HOME}/.dotnet
+. "$HOME/.cargo/env"
+. "$HOME/.tokens"

@@ -8,6 +8,8 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 alias home="cd"
 alias atom=code
+alias vim=nvim
+alias v=nvim
 
 # be nice
 alias please=sudo

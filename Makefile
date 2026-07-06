@@ -16,12 +16,10 @@ macos: sudo core-macos packages nvim-$(OS) link
 linux: core-linux nvim-$(OS) zsh-$(OS) dotnet-$(OS) pip3-$(OS) python-$(OS) link
 
 core-linux:
-	sudo apt-get update || true
-
-
+	sudo apt-get update || sudo apt-get install curl zsh vim stow \
+				|| true
 
 stow-linux: core-linux
-				is-executable stow || sudo apt install -y stow
 
 nvim-linux:
 				@set -euo pipefail; \
@@ -48,9 +46,10 @@ nvim-macos:
 
 zsh-linux:
 				is-executable zsh || \
-								$$(sudo apt install -y zsh \
+							  (sudo apt install -y curl zsh \
 								&& sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
-								&& chsh -s $(which zsh))
+								&& git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions \
+								&& chsh -s `which zsh`)
 
 dotnet-linux:
 				is-executable dotnet || \

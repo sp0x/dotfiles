@@ -7,7 +7,6 @@ execute pathogen#infect()
 "----------Settings-----------
 
 syntax on      "Syntax highlight on
-colo nord
 filetype plugin indent on
 
 set backspace=indent,eol,start   "Make backspace work like in mac

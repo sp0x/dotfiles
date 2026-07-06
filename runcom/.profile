@@ -53,7 +53,7 @@ esac
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
-export EDITOR="/opt/nvim-linux64/bin/nvim"
+export EDITOR="nvim"
 
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
@@ -159,8 +159,12 @@ export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH=${PATH}:/home/vasko/.local/bin
-export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="${PATH}:$HOME/.local/bin"
 export PATH="$PATH:/opt/mssql-tools/bin"
+export PATH="$PATH:$HOME/.dotnet/tools"
 export GCM_CREDENTIAL_STORE=secretservice
 . "$HOME/.cargo/env"
+
+. "$HOME/.local/share/../bin/env"
+. "$HOME/.tokens"
+export PYTHONPATH=$HOME/.local/venv/nvim/lib/python3.12:$PYTHONPATH

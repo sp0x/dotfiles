@@ -1,0 +1,7 @@
+{
+  "allowedUrls": [
+    "https://docs.github.com"
+  ],
+  "model": "gpt-5.3-codex",
+  "effortLevel": "high"
+}

@@ -8,6 +8,8 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 alias home="cd"
 alias atom=code
+# LLM and agents
+alias slop="copilot"
 
 # Editors
 alias vim=nvim

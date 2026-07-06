@@ -11,9 +11,9 @@ export ACCEPT_EULA=Y
 
 all: $(OS)
 
-macos: sudo core-macos packages link
+macos: sudo core-macos packages nvim-$(OS) link
 
-linux: core-linux vim-$(OS) zsh-$(OS) install-vim dotnet-$(OS) pip3-$(OS) python-$(OS) link
+linux: core-linux nvim-$(OS) zsh-$(OS) dotnet-$(OS) pip3-$(OS) python-$(OS) link
 
 core-linux:
 	sudo apt-get update || true
@@ -23,8 +23,28 @@ core-linux:
 stow-linux: core-linux
 				is-executable stow || sudo apt install -y stow
 
-vim-linux:
-				is-executable vim || sudo apt install -y vim
+nvim-linux:
+				@set -euo pipefail; \
+				arch="$$(uname -m)"; \
+				case "$$arch" in \
+					x86_64|amd64) archive="nvim-linux-x86_64.tar.gz" ;; \
+					aarch64|arm64) archive="nvim-linux-arm64.tar.gz" ;; \
+					*) echo "Unsupported architecture for Neovim install: $$arch" >&2; exit 1 ;; \
+				esac; \
+				tmp_dir="$$(mktemp -d)"; \
+				trap 'rm -rf "$$tmp_dir"' EXIT; \
+				tarball="$$tmp_dir/nvim.tar.gz"; \
+				curl -fL "https://github.com/neovim/neovim/releases/latest/download/$$archive" -o "$$tarball"; \
+				tar -xzf "$$tarball" -C "$$tmp_dir"; \
+				extracted_dir="$$tmp_dir/$${archive%.tar.gz}"; \
+				[ -d "$$extracted_dir" ] || { echo "Failed to extract Neovim archive" >&2; exit 1; }; \
+				sudo rm -rf /opt/nvim; \
+				sudo mv "$$extracted_dir" /opt/nvim; \
+				sudo ln -sf /opt/nvim/bin/nvim /usr/local/bin/nvim; \
+				echo "Installed latest Neovim to /opt/nvim"
+
+nvim-macos:
+				is-executable nvim || brew install neovim
 
 zsh-linux:
 				is-executable zsh || \
@@ -43,7 +63,12 @@ dotnet-linux:
 								&& sudo apt-get install -y dotnet-sdk-{8}.0)
 
 python-linux:
-	curl -LsSf https://astral.sh/uv/install.sh | sh
+	curl -LsSf https://astral.sh/uv/install.sh | sh \
+		&& sudo apt install -y python3-venv \
+		&& sudo apt install -y python3-pip \
+		&& sudo apt install -y python3-dev \
+		&& sudo apt install -y python3-setuptools \
+		&& sudo apt install -y python3-wheel
 
 pip3-linux:
 				is-executable pip3 || sudo apt install -y python3-pip
@@ -62,9 +87,11 @@ link: stow-$(OS)
 	mkdir -p $(XDG_CONFIG_HOME)
 	stow -t $(HOME) runcom
 	stow -t $(XDG_CONFIG_HOME) config
+	bin/link-llm link
 
 unlink: stow-$(OS)
 	stow --delete -t $(HOME) runcom
 	stow --delete -t $(XDG_CONFIG_HOME) config
 	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE.bak ]; then \
 		mv -v $(HOME)/$$FILE.bak $(HOME)/$${FILE%%.bak}; fi; done
+	bin/link-llm unlink

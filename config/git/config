@@ -43,9 +43,15 @@
 [credential]
 	helper = 
 	helper = /usr/local/bin/git-credential-manager
+	helper = 
+	helper = /home/vasko/.dotnet/tools/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
 [push]
 	autoSetupRemote = true
 [pull]
 	rebase = false
+[branch]
+	autoSetupMerge = simple
+[credential "https://codeberg.org"]
+	provider = generic

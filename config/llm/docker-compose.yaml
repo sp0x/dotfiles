@@ -1,0 +1,8 @@
+services:
+  faster-whisper:
+    image: fedirz/faster-whisper-server:latest-cpu
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      WHISPER__MODEL: Systran/faster-whisper-base

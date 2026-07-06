@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+COPILOT_DIR="$HOME/.copilot"
+COPILOT_SOURCE_DIR="$DOTFILES_DIR/config/llm/copilot"
+
+link() {
+  mkdir -p "$COPILOT_DIR"
+  if [ ! -d "$COPILOT_SOURCE_DIR" ]; then
+    echo "Missing source directory: $COPILOT_SOURCE_DIR" >&2
+    exit 1
+  fi
+
+  shopt -s nullglob
+  local sources=("$COPILOT_SOURCE_DIR"/*)
+  local source target
+  for source in "${sources[@]}"; do
+    target="$COPILOT_DIR/$(basename "$source")"
+    rm -f "$target"
+    ln -sf "$source" "$target"
+  done
+
+  echo "Linked LLM config to $COPILOT_DIR"
+}
+
+unlink() {
+  if [ ! -d "$COPILOT_SOURCE_DIR" ]; then
+    echo "Missing source directory: $COPILOT_SOURCE_DIR" >&2
+    exit 1
+  fi
+
+  shopt -s nullglob
+  local sources=("$COPILOT_SOURCE_DIR"/*)
+  local source
+  for source in "${sources[@]}"; do
+    rm -f "$COPILOT_DIR/$(basename "$source")"
+  done
+
+  echo "Unlinked LLM config from $COPILOT_DIR"
+}
+
+case "${1:-link}" in
+  link)   link ;;
+  unlink) unlink ;;
+  *) echo "Usage: $0 [link|unlink]" >&2; exit 1 ;;
+esac
